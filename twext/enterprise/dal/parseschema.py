@@ -41,7 +41,7 @@ from sqlparse.tokens import (
     Keyword, Punctuation, Number, String, Name, Comparison as CompTok
 )
 from sqlparse.sql import (Comment, Identifier, Parenthesis, IdentifierList,
-                          Function, Comparison)
+                          Function, Comparison, Values)
 
 from twext.enterprise.dal.model import (
     Schema, Table, SQLType, ProcedureCall, Constraint, Sequence, Index, Function as FunctionModel)
