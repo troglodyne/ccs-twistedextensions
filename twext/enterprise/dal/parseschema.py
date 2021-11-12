@@ -235,10 +235,16 @@ def addSQLToSchema(schema, schemaData):
                 tableName = token.get_name()
                 columns = None
 
-            expect(insertTokens, ttype=Keyword, value="VALUES")
+            values = insertTokens.next()
+            if(not isinstance(values, Values)):
+                raise ViolatedExpectation(
+                    ttype, "%s:%r" % (Values, values)
+                )
 
-            values = expect(insertTokens, cls=Parenthesis)
             vals = iterSignificant(values)
+            expect(vals, ttype=Keyword, value="VALUES")
+
+            expect(vals, cls=Parenthesis)
             expect(vals, ttype=Punctuation, value="(")
 
             valuelist = expect(vals, cls=IdentifierList)
