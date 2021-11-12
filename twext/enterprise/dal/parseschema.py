@@ -720,8 +720,8 @@ def significant(token):
     Determine if the token is "significant", i.e. that it is not a comment and
     not whitespace.
     """
-    # comment has None is_whitespace() result.  intentional?
-    return (not isinstance(token, Comment) and not token.is_whitespace())
+    # comment has None is_whitespace result.  intentional?
+    return (not isinstance(token, Comment) and not token.is_whitespace)
 
 
 def iterSignificant(tokenList):
