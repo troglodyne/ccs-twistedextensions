@@ -244,15 +244,20 @@ def addSQLToSchema(schema, schemaData):
             vals = iterSignificant(values)
             expect(vals, ttype=Keyword, value="VALUES")
 
-            expect(vals, cls=Parenthesis)
-            expect(vals, ttype=Punctuation, value="(")
+            parenContent = iterSignificant(expect(vals, cls=Parenthesis))
+            expect(parenContent, ttype=Punctuation, value="(")
 
-            valuelist = expect(vals, cls=IdentifierList)
-            expect(vals, ttype=Punctuation, value=")")
+            valuelist = expect(parenContent, cls=IdentifierList)
+            expect(parenContent, ttype=Punctuation, value=")")
 
             rowData = []
 
-            for ident in valuelist.get_identifiers():
+            for ident in valuelist:
+                print(ident.ttype)
+
+                # Skip non-integer
+                if ident.ttype != Number.Integer:
+                    continue
                 rowData.append(
                     {Number.Integer: int,
                      String.Single: _destringify}
