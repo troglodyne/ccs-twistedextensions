@@ -253,7 +253,6 @@ def addSQLToSchema(schema, schemaData):
             rowData = []
 
             for ident in valuelist:
-                print(ident.ttype)
 
                 # Skip non-integer
                 if ident.ttype != Number.Integer:
