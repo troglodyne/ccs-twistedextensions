@@ -353,7 +353,7 @@ class _ColumnParser(object):
         Parse the next column or constraint, depending on the next token.
         """
         maybeIdent = self.next()
-        if maybeIdent.ttype == Name:
+        if maybeIdent.ttype == Name or ( maybeIdent.ttype == Keyword and maybeIdent.value == "PATH" ):
             return self.parseColumn(maybeIdent.value)
         elif isinstance(maybeIdent, Identifier):
             return self.parseColumn(maybeIdent.get_name())
