@@ -38,7 +38,7 @@ from re import compile
 
 from sqlparse import parse, keywords
 from sqlparse.tokens import (
-    Keyword, Punctuation, Number, String, Name, Comparison as CompTok
+    Keyword, Punctuation, Whitespace, Number, String, Name, Comparison as CompTok
 )
 from sqlparse.sql import (Comment, Identifier, Parenthesis, IdentifierList,
                           Function, Comparison, Values)
@@ -254,8 +254,8 @@ def addSQLToSchema(schema, schemaData):
 
             for ident in valuelist:
 
-                # Skip non-integer
-                if ident.ttype != Number.Integer:
+                # Skip punctuation, etc
+                if ident.ttype == Punctuation or ident.ttype == Whitespace:
                     continue
                 rowData.append(
                     {Number.Integer: int,
